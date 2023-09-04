@@ -1,7 +1,7 @@
 # 🤖 resumeAI 🧠📝
 Welcome to the world of resumeAI! 🚀 Where engaging, knowledgeable, and empathetic conversations converge seamlessly! This project aims to interact with the user to collect their information to create a resume using the open-AI's chatGPT API, and customize using various templates as required. ✨
 
-💻[Demo Video]()
+💻[Demo Video](https://drive.google.com/drive/folders/17mjzoJ-T3DF-aFqvTF6QNSwNMeV2p0Up?usp=sharing)
 
 ### Abstract 📜
 Welcome to the future of resume creation with ResumeAI, an innovative project that leverages the power of OpenAI's ChatGPT API to provide users with an engaging, knowledgeable, and empathetic experience. In today's competitive job market, a well-crafted resume is the key to unlocking professional opportunities, and ResumeAI aims to streamline this process.
