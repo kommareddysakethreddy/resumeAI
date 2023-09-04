@@ -3,7 +3,7 @@ from textbase.models import OpenAI
 from typing import List
 
 # Load your OpenAI API key
-OpenAI_API_KEY="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"
+OpenAI_API_KEY=<OpenAI_API_KEY>
 OpenAI.api_key = OpenAI_API_KEY
 # OpenAI.api_key = ""
 

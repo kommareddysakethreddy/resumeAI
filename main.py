@@ -8,44 +8,62 @@ import requests
 from utils.sendMail import mail
 
 
-OpenAI.api_key = os.getenv(OpenAI_API_KEY)
+# OpenAI.api_key = os.getenv(OpenAI_API_KEY)
+OpenAI_API_KEY=<OpenAI_API_KEY>
+OpenAI.api_key = OpenAI_API_KEY
 
 # System prompt; this will set the tone of the bot for the rest of the conversation.
 
 SYSTEM_PROMPT = """
-###Personal Information###
-Name:
-Address:
-Email:
-LinkedIn:
-Phone Number:
-Summary:
 
-###Soft Skills### 
-###Technical Skills### 
-Includes front end and back end technologies
-Other Skills
+Ask one line questions to fill all the details needed to create a json like the one below. At the end when all fields are filled or user says enough or thank you return ONLY JSON with appropriate fields at the end without anything else. DO NOT ADD OR RECOMMEND ANYTHING. ALWAYS ASK IF USER IS DONE BEFORE MOVING TO NEXT SECTION ! IMPORTANT !
+{
+    "name": "",
+    "address": "",
+    "email": "",
+    "linkedin": "",
+    "number": "",
+    "summary": "",
+    "soft_skills": [
+        skill1, skill2,.... skilln
+    ],
+    "technical_skills": [
+        skill1, skill2,.... skilln
+    ],
+    "experience": [
+        {
+            "company": "",
+            "position": "",
+            "date": "",
+            "description": ""
+        },
+        {
+            "company": "",
+            "position": "",
+            "date": "",
+            "description": ""
+        },....
+    ],
+    "education": {
+        "institution": "",
+        "major": "",
+        "gpa": ""
+    }
+    "XIIth": {
+        "institution": "",
+        "major": "",
+        "gpa": ""
+    },
+    "XIIth": {
+        "institution": "",
+        "major": "",
+        "gpa": ""
+    },
+}
 
-###Current Education:###
--->College name
-year of completion 
-CGPA or percentage of marks
--->12th Education 
--->10th Education 
-
-###Work Experience###
-format : Company name,worked from a to b 
-Information user wants to provide related to projects worked in company 
-
-###Projects###
-Projects worked on 
-Format: project names, project details, Tech Stack Used
-
-
-Ask one line question or reply to answer in one statement and get all the above details one by one and convert it to a appropriate json format with fiels and nested fields. return only json with appropriate fields.  
-
+### return ONLY JSON AT THE END without anything else  ### IMPORTANT!
 """
-m=[]
+
 @bot() #The decorator function
 def on_message(message_history: List[Message], state: dict = None):
 
@@ -57,18 +75,13 @@ def on_message(message_history: List[Message], state: dict = None):
         system_prompt=SYSTEM_PROMPT,
         message_history=message_history
     )
-    print(SYSTEM_PROMPT+"after prompt -> response")
-
-    m.append(bot_response)
-    print(bot_response)
+    print(SYSTEM_PROMPT+"Got a response")
 
     try:
-        da = json.loads(bot_response)
-        print(type(bot_response), type(da))
-        api = "https://saketh63.pythonanywhere.com/generate-resume-api"
-        res = requests.post(api, json=da)
-        print(res.text)
-        mailing(da['email'], res.text)
+        data = json.loads(bot_response)
+        print(data)
+        
+        mail(data['email'], data)
     except:
         print("error")
         pass
